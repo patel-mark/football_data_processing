@@ -217,110 +217,110 @@ def main():
     
     # Read all data files
     data_path = "../data/Premier_League_data/"
-    PL_1 = pd.read_csv(f"{data_path}Squad_Standard_Stats.csv", skiprows=1)
-    PL_2 = pd.read_csv(f"{data_path}Squad_Standard_Stats(opponent stats).csv", skiprows=1)
-    PL_3 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats.csv", skiprows=1)
-    PL_4 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
-    PL_5 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats.csv", skiprows=1)
-    PL_6 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
-    PL_7 = pd.read_csv(f"{data_path}Squad_Shooting_Stats.csv", skiprows=1)
-    PL_8 = pd.read_csv(f"{data_path}Squad_Shooting_Stats(opponent stats).csv", skiprows=1)
-    PL_9 = pd.read_csv(f"{data_path}Squad_Passing_Stats.csv", skiprows=1)
-    PL_10 = pd.read_csv(f"{data_path}Squad_Passing_Stats(opponent stats).csv", skiprows=1)
-    PL_11 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats.csv", skiprows=1)
-    PL_12 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats(opponent stats).csv", skiprows=1)
-    PL_13 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats.csv", skiprows=1)
-    PL_14 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats(opponent stats).csv", skiprows=1)
-    PL_15 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats.csv", skiprows=1)
-    PL_16 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats(opponent stats).csv", skiprows=1)
-    PL_17 = pd.read_csv(f"{data_path}Squad_Possession_Stats.csv", skiprows=1)
-    PL_18 = pd.read_csv(f"{data_path}Squad_Possession_Stats(opponent stats).csv", skiprows=1)
-    PL_21 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats.csv", skiprows=1)
-    PL_22 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_1 = pd.read_csv(f"{data_path}Squad_Standard_Stats.csv", skiprows=1)
+    Ligue_1_2 = pd.read_csv(f"{data_path}Squad_Standard_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_3 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats.csv", skiprows=1)
+    Ligue_1_4 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_5 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats.csv", skiprows=1)
+    Ligue_1_6 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_7 = pd.read_csv(f"{data_path}Squad_Shooting_Stats.csv", skiprows=1)
+    Ligue_1_8 = pd.read_csv(f"{data_path}Squad_Shooting_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_9 = pd.read_csv(f"{data_path}Squad_Passing_Stats.csv", skiprows=1)
+    Ligue_1_10 = pd.read_csv(f"{data_path}Squad_Passing_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_11 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats.csv", skiprows=1)
+    Ligue_1_12 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_13 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats.csv", skiprows=1)
+    Ligue_1_14 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_15 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats.csv", skiprows=1)
+    Ligue_1_16 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_17 = pd.read_csv(f"{data_path}Squad_Possession_Stats.csv", skiprows=1)
+    Ligue_1_18 = pd.read_csv(f"{data_path}Squad_Possession_Stats(opponent stats).csv", skiprows=1)
+    Ligue_1_21 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats.csv", skiprows=1)
+    Ligue_1_22 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats(opponent stats).csv", skiprows=1)
 
     # Process and merge all stats categories
-    PL_Squad_Standard_Stats_df = pd.merge(
-        process_standard_stats(PL_1),
-        process_standard_stats(PL_2, is_opponent=True),
+    Ligue_1_Squad_Standard_Stats_df = pd.merge(
+        process_standard_stats(Ligue_1_1),
+        process_standard_stats(Ligue_1_2, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Goalkeeping_Stats_df = pd.merge(
-        process_goalkeeping_stats(PL_3),
-        process_goalkeeping_stats(PL_4, is_opponent=True),
+    Ligue_1_Squad_Goalkeeping_Stats_df = pd.merge(
+        process_goalkeeping_stats(Ligue_1_3),
+        process_goalkeeping_stats(Ligue_1_4, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Advanced_Goalkeeping_Stats_df = pd.merge(
-        process_advanced_gk_stats(PL_5),
-        process_advanced_gk_stats(PL_6, is_opponent=True),
+    Ligue_1_Squad_Advanced_Goalkeeping_Stats_df = pd.merge(
+        process_advanced_gk_stats(Ligue_1_5),
+        process_advanced_gk_stats(Ligue_1_6, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Shooting_Stats_df = pd.merge(
-        process_shooting_stats(PL_7),
-        process_shooting_stats(PL_8, is_opponent=True),
+    Ligue_1_Squad_Shooting_Stats_df = pd.merge(
+        process_shooting_stats(Ligue_1_7),
+        process_shooting_stats(Ligue_1_8, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Passing_Stats_df = pd.merge(
-        process_passing_stats(PL_9),
-        process_passing_stats(PL_10, is_opponent=True),
+    Ligue_1_Squad_Passing_Stats_df = pd.merge(
+        process_passing_stats(Ligue_1_9),
+        process_passing_stats(Ligue_1_10, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Pass_Types_Stats_df = pd.merge(
-        process_pass_types_stats(PL_11),
-        process_pass_types_stats(PL_12, is_opponent=True),
+    Ligue_1_Squad_Pass_Types_Stats_df = pd.merge(
+        process_pass_types_stats(Ligue_1_11),
+        process_pass_types_stats(Ligue_1_12, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Goal_Shot_Creation_Stats_df = pd.merge(
-        process_gsc_stats(PL_13),
-        process_gsc_stats(PL_14, is_opponent=True),
+    Ligue_1_Squad_Goal_Shot_Creation_Stats_df = pd.merge(
+        process_gsc_stats(Ligue_1_13),
+        process_gsc_stats(Ligue_1_14, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Defensive_Actions_Stats_df = pd.merge(
-        process_defensive_stats(PL_15),
-        process_defensive_stats(PL_16, is_opponent=True),
+    Ligue_1_Squad_Defensive_Actions_Stats_df = pd.merge(
+        process_defensive_stats(Ligue_1_15),
+        process_defensive_stats(Ligue_1_16, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Possession_Stats_df = pd.merge(
-        process_possession_stats(PL_17),
-        process_possession_stats(PL_18, is_opponent=True),
+    Ligue_1_Squad_Possession_Stats_df = pd.merge(
+        process_possession_stats(Ligue_1_17),
+        process_possession_stats(Ligue_1_18, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Miscellaneous_Stats_df = pd.merge(
-        process_misc_stats(PL_21),
-        process_misc_stats(PL_22, is_opponent=True),
+    Ligue_1_Squad_Miscellaneous_Stats_df = pd.merge(
+        process_misc_stats(Ligue_1_21),
+        process_misc_stats(Ligue_1_22, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
     # Prepare for final merge
     dataframes = [
-        PL_Squad_Standard_Stats_df,
-        PL_Squad_Goalkeeping_Stats_df,
-        PL_Squad_Advanced_Goalkeeping_Stats_df,
-        PL_Squad_Shooting_Stats_df,
-        PL_Squad_Passing_Stats_df,
-        PL_Squad_Pass_Types_Stats_df,
-        PL_Squad_Goal_Shot_Creation_Stats_df,
-        PL_Squad_Defensive_Actions_Stats_df,
-        PL_Squad_Possession_Stats_df,
-        PL_Squad_Miscellaneous_Stats_df
+        Ligue_1_Squad_Standard_Stats_df,
+        Ligue_1_Squad_Goalkeeping_Stats_df,
+        Ligue_1_Squad_Advanced_Goalkeeping_Stats_df,
+        Ligue_1_Squad_Shooting_Stats_df,
+        Ligue_1_Squad_Passing_Stats_df,
+        Ligue_1_Squad_Pass_Types_Stats_df,
+        Ligue_1_Squad_Goal_Shot_Creation_Stats_df,
+        Ligue_1_Squad_Defensive_Actions_Stats_df,
+        Ligue_1_Squad_Possession_Stats_df,
+        Ligue_1_Squad_Miscellaneous_Stats_df
     ]
     
     columns_to_drop = ['MP', 'MP_against', '90s', '90s_against']
@@ -343,8 +343,8 @@ def main():
         lambda left, right: pd.merge(left, right, on='Squad', how='outer'),
         processed_dfs
     )
-    
-    output_path = os.path.join(processed_dir, "Premier_League_merged_squad_stats.csv")
+
+    output_path = os.path.join(processed_dir, "Ligue_1_merged_squad_stats.csv")
     merged_df.to_csv(output_path, index=False)
     print(f"Merged data saved to {output_path}")
 

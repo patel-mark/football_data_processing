@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from functools import reduce
+import os
 
 def process_standard_stats(df, is_opponent=False):
     """Process standard stats dataframe"""
@@ -210,6 +211,10 @@ def process_misc_stats(df, is_opponent=False):
     return df
 
 def main():
+    # Create processed data directory if it doesn't exist
+    processed_dir = "../data/Processed_data"
+    os.makedirs(processed_dir, exist_ok=True)
+    
     # Read all data files
     data_path = "../data/La_Liga_data/"
     La_Liga_1 = pd.read_csv(f"{data_path}Squad_Standard_Stats.csv", skiprows=1)
@@ -321,7 +326,7 @@ def main():
     columns_to_drop = ['MP', 'MP_against', '90s', '90s_against']
     prefixes = [
         "Standard_", "Goalkeeping_", "AdvGoalkeeping_", "Shooting_", 
-        "Passing_", "PassTypes_", "GSC_", "Defense_", "Possession_", "Misc_"
+        "Passing_", "PassTypes_", "GSC_", "Defense_", "Possession_", "Miscellaneous_"
     ]
 
     processed_dfs = []
@@ -333,13 +338,15 @@ def main():
         })
         processed_dfs.append(df_clean)
 
-    # Final merge and save
+    # Final merge and save to Processed_data directory
     merged_df = reduce(
         lambda left, right: pd.merge(left, right, on='Squad', how='outer'),
         processed_dfs
     )
-    merged_df.to_csv('La_Liga_merged_squad_stats.csv', index=False)
-    print("Merged data saved to La_Liga_merged_squad_stats.csv")
+
+    output_path = os.path.join(processed_dir, "La_Liga_merged_squad_stats.csv")
+    merged_df.to_csv(output_path, index=False)
+    print(f"Merged data saved to {output_path}")
 
 if __name__ == "__main__":
     main()
