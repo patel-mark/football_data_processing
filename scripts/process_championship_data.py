@@ -216,7 +216,7 @@ def main():
     os.makedirs(processed_dir, exist_ok=True)
     
     # Read all data files
-    data_path = "../data/Championship_data/"
+    data_path = "../data/Raw_data/Championship_data/"
     Championship_1 = pd.read_csv(f"{data_path}Squad_Standard_Stats.csv", skiprows=1)
     Championship_2 = pd.read_csv(f"{data_path}Squad_Standard_Stats(opponent stats).csv", skiprows=1)
     Championship_3 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats.csv", skiprows=1)
