@@ -211,32 +211,40 @@ def process_misc_stats(df, is_opponent=False):
     return df
 
 def main():
-    # Create processed data directory if it doesn't exist
-    processed_dir = "../data/Processed_data"
+    # Get the absolute path of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Calculate the project root path (three levels up from script)
+    project_root = os.path.abspath(os.path.join(script_dir, os.pardir, os.pardir, os.pardir))
+    
+    # Set data paths relative to project root
+    raw_data_dir = os.path.join(project_root, "data", "Raw_data", "Eredivisie_data")
+    processed_dir = os.path.join(project_root, "data", "Processed_data")
+    
+    # Create processed directory if it doesn't exist
     os.makedirs(processed_dir, exist_ok=True)
     
-    # Read all data files
-    data_path = "../data/Raw_data/Eredivisie_data/"
-    Eredivisie_1 = pd.read_csv(f"{data_path}Squad_Standard_Stats.csv", skiprows=1)
-    Eredivisie_2 = pd.read_csv(f"{data_path}Squad_Standard_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_3 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats.csv", skiprows=1)
-    Eredivisie_4 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_5 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats.csv", skiprows=1)
-    Eredivisie_6 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_7 = pd.read_csv(f"{data_path}Squad_Shooting_Stats.csv", skiprows=1)
-    Eredivisie_8 = pd.read_csv(f"{data_path}Squad_Shooting_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_9 = pd.read_csv(f"{data_path}Squad_Passing_Stats.csv", skiprows=1)
-    Eredivisie_10 = pd.read_csv(f"{data_path}Squad_Passing_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_11 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats.csv", skiprows=1)
-    Eredivisie_12 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_13 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats.csv", skiprows=1)
-    Eredivisie_14 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_15 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats.csv", skiprows=1)
-    Eredivisie_16 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_17 = pd.read_csv(f"{data_path}Squad_Possession_Stats.csv", skiprows=1)
-    Eredivisie_18 = pd.read_csv(f"{data_path}Squad_Possession_Stats(opponent stats).csv", skiprows=1)
-    Eredivisie_21 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats.csv", skiprows=1)
-    Eredivisie_22 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats(opponent stats).csv", skiprows=1)
+    # Read all data files using absolute paths
+    Eredivisie_1 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Standard_Stats.csv"), skiprows=1)
+    Eredivisie_2 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Standard_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_3 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goalkeeping_Stats.csv"), skiprows=1)
+    Eredivisie_4 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goalkeeping_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_5 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Advanced_Goalkeeping_Stats.csv"), skiprows=1)
+    Eredivisie_6 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Advanced_Goalkeeping_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_7 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Shooting_Stats.csv"), skiprows=1)
+    Eredivisie_8 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Shooting_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_9 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Passing_Stats.csv"), skiprows=1)
+    Eredivisie_10 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Passing_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_11 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Pass_Types_Stats.csv"), skiprows=1)
+    Eredivisie_12 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Pass_Types_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_13 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goal_Shot_Creation_Stats.csv"), skiprows=1)
+    Eredivisie_14 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goal_Shot_Creation_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_15 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Defensive_Actions_Stats.csv"), skiprows=1)
+    Eredivisie_16 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Defensive_Actions_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_17 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Possession_Stats.csv"), skiprows=1)
+    Eredivisie_18 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Possession_Stats(opponent stats).csv"), skiprows=1)
+    Eredivisie_21 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Miscellaneous_Stats.csv"), skiprows=1)
+    Eredivisie_22 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Miscellaneous_Stats(opponent stats).csv"), skiprows=1)
 
     # Process and merge all stats categories
     Eredivisie_Squad_Standard_Stats_df = pd.merge(
@@ -343,10 +351,10 @@ def main():
         lambda left, right: pd.merge(left, right, on='Squad', how='outer'),
         processed_dfs
     )
-    
+
     output_path = os.path.join(processed_dir, "Eredivisie_merged_squad_stats.csv")
     merged_df.to_csv(output_path, index=False)
-    print(f"Merged data saved to {output_path}")
+    print(f"✅ Eredivisie merged data saved to {output_path}")
 
 if __name__ == "__main__":
     main()

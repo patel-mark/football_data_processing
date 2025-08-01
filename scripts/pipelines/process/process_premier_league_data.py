@@ -211,116 +211,124 @@ def process_misc_stats(df, is_opponent=False):
     return df
 
 def main():
-    # Create processed data directory if it doesn't exist
-    processed_dir = "../data/Processed_data"
+    # Get the absolute path of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Calculate the project root path (three levels up from script)
+    project_root = os.path.abspath(os.path.join(script_dir, os.pardir, os.pardir, os.pardir))
+    
+    # Set data paths relative to project root
+    raw_data_dir = os.path.join(project_root, "data", "Raw_data", "Premier_League_data")
+    processed_dir = os.path.join(project_root, "data", "Processed_data")
+    
+    # Create processed directory if it doesn't exist
     os.makedirs(processed_dir, exist_ok=True)
     
-    # Read all data files
-    data_path = "../data/Raw_data/Premier_League_data/"
-    PL_1 = pd.read_csv(f"{data_path}Squad_Standard_Stats.csv", skiprows=1)
-    PL_2 = pd.read_csv(f"{data_path}Squad_Standard_Stats(opponent stats).csv", skiprows=1)
-    PL_3 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats.csv", skiprows=1)
-    PL_4 = pd.read_csv(f"{data_path}Squad_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
-    PL_5 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats.csv", skiprows=1)
-    PL_6 = pd.read_csv(f"{data_path}Squad_Advanced_Goalkeeping_Stats(opponent stats).csv", skiprows=1)
-    PL_7 = pd.read_csv(f"{data_path}Squad_Shooting_Stats.csv", skiprows=1)
-    PL_8 = pd.read_csv(f"{data_path}Squad_Shooting_Stats(opponent stats).csv", skiprows=1)
-    PL_9 = pd.read_csv(f"{data_path}Squad_Passing_Stats.csv", skiprows=1)
-    PL_10 = pd.read_csv(f"{data_path}Squad_Passing_Stats(opponent stats).csv", skiprows=1)
-    PL_11 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats.csv", skiprows=1)
-    PL_12 = pd.read_csv(f"{data_path}Squad_Pass_Types_Stats(opponent stats).csv", skiprows=1)
-    PL_13 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats.csv", skiprows=1)
-    PL_14 = pd.read_csv(f"{data_path}Squad_Goal_Shot_Creation_Stats(opponent stats).csv", skiprows=1)
-    PL_15 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats.csv", skiprows=1)
-    PL_16 = pd.read_csv(f"{data_path}Squad_Defensive_Actions_Stats(opponent stats).csv", skiprows=1)
-    PL_17 = pd.read_csv(f"{data_path}Squad_Possession_Stats.csv", skiprows=1)
-    PL_18 = pd.read_csv(f"{data_path}Squad_Possession_Stats(opponent stats).csv", skiprows=1)
-    PL_21 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats.csv", skiprows=1)
-    PL_22 = pd.read_csv(f"{data_path}Squad_Miscellaneous_Stats(opponent stats).csv", skiprows=1)
+    # Read all data files using absolute paths
+    Premier_League_1 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Standard_Stats.csv"), skiprows=1)
+    Premier_League_2 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Standard_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_3 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goalkeeping_Stats.csv"), skiprows=1)
+    Premier_League_4 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goalkeeping_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_5 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Advanced_Goalkeeping_Stats.csv"), skiprows=1)
+    Premier_League_6 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Advanced_Goalkeeping_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_7 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Shooting_Stats.csv"), skiprows=1)
+    Premier_League_8 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Shooting_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_9 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Passing_Stats.csv"), skiprows=1)
+    Premier_League_10 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Passing_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_11 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Pass_Types_Stats.csv"), skiprows=1)
+    Premier_League_12 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Pass_Types_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_13 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goal_Shot_Creation_Stats.csv"), skiprows=1)
+    Premier_League_14 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Goal_Shot_Creation_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_15 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Defensive_Actions_Stats.csv"), skiprows=1)
+    Premier_League_16 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Defensive_Actions_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_17 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Possession_Stats.csv"), skiprows=1)
+    Premier_League_18 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Possession_Stats(opponent stats).csv"), skiprows=1)
+    Premier_League_21 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Miscellaneous_Stats.csv"), skiprows=1)
+    Premier_League_22 = pd.read_csv(os.path.join(raw_data_dir, "Squad_Miscellaneous_Stats(opponent stats).csv"), skiprows=1)
 
     # Process and merge all stats categories
-    PL_Squad_Standard_Stats_df = pd.merge(
-        process_standard_stats(PL_1),
-        process_standard_stats(PL_2, is_opponent=True),
+    Premier_League_Squad_Standard_Stats_df = pd.merge(
+        process_standard_stats(Premier_League_1),
+        process_standard_stats(Premier_League_2, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Goalkeeping_Stats_df = pd.merge(
-        process_goalkeeping_stats(PL_3),
-        process_goalkeeping_stats(PL_4, is_opponent=True),
+    Premier_League_Squad_Goalkeeping_Stats_df = pd.merge(
+        process_goalkeeping_stats(Premier_League_3),
+        process_goalkeeping_stats(Premier_League_4, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Advanced_Goalkeeping_Stats_df = pd.merge(
-        process_advanced_gk_stats(PL_5),
-        process_advanced_gk_stats(PL_6, is_opponent=True),
+    Premier_League_Squad_Advanced_Goalkeeping_Stats_df = pd.merge(
+        process_advanced_gk_stats(Premier_League_5),
+        process_advanced_gk_stats(Premier_League_6, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Shooting_Stats_df = pd.merge(
-        process_shooting_stats(PL_7),
-        process_shooting_stats(PL_8, is_opponent=True),
+    Premier_League_Squad_Shooting_Stats_df = pd.merge(
+        process_shooting_stats(Premier_League_7),
+        process_shooting_stats(Premier_League_8, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Passing_Stats_df = pd.merge(
-        process_passing_stats(PL_9),
-        process_passing_stats(PL_10, is_opponent=True),
+    Premier_League_Squad_Passing_Stats_df = pd.merge(
+        process_passing_stats(Premier_League_9),
+        process_passing_stats(Premier_League_10, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Pass_Types_Stats_df = pd.merge(
-        process_pass_types_stats(PL_11),
-        process_pass_types_stats(PL_12, is_opponent=True),
+    Premier_League_Squad_Pass_Types_Stats_df = pd.merge(
+        process_pass_types_stats(Premier_League_11),
+        process_pass_types_stats(Premier_League_12, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Goal_Shot_Creation_Stats_df = pd.merge(
-        process_gsc_stats(PL_13),
-        process_gsc_stats(PL_14, is_opponent=True),
+    Premier_League_Squad_Goal_Shot_Creation_Stats_df = pd.merge(
+        process_gsc_stats(Premier_League_13),
+        process_gsc_stats(Premier_League_14, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Defensive_Actions_Stats_df = pd.merge(
-        process_defensive_stats(PL_15),
-        process_defensive_stats(PL_16, is_opponent=True),
+    Premier_League_Squad_Defensive_Actions_Stats_df = pd.merge(
+        process_defensive_stats(Premier_League_15),
+        process_defensive_stats(Premier_League_16, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Possession_Stats_df = pd.merge(
-        process_possession_stats(PL_17),
-        process_possession_stats(PL_18, is_opponent=True),
+    Premier_League_Squad_Possession_Stats_df = pd.merge(
+        process_possession_stats(Premier_League_17),
+        process_possession_stats(Premier_League_18, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
-    PL_Squad_Miscellaneous_Stats_df = pd.merge(
-        process_misc_stats(PL_21),
-        process_misc_stats(PL_22, is_opponent=True),
+    Premier_League_Squad_Miscellaneous_Stats_df = pd.merge(
+        process_misc_stats(Premier_League_21),
+        process_misc_stats(Premier_League_22, is_opponent=True),
         on='Squad',
         how='inner'
     )
 
     # Prepare for final merge
     dataframes = [
-        PL_Squad_Standard_Stats_df,
-        PL_Squad_Goalkeeping_Stats_df,
-        PL_Squad_Advanced_Goalkeeping_Stats_df,
-        PL_Squad_Shooting_Stats_df,
-        PL_Squad_Passing_Stats_df,
-        PL_Squad_Pass_Types_Stats_df,
-        PL_Squad_Goal_Shot_Creation_Stats_df,
-        PL_Squad_Defensive_Actions_Stats_df,
-        PL_Squad_Possession_Stats_df,
-        PL_Squad_Miscellaneous_Stats_df
+        Premier_League_Squad_Standard_Stats_df,
+        Premier_League_Squad_Goalkeeping_Stats_df,
+        Premier_League_Squad_Advanced_Goalkeeping_Stats_df,
+        Premier_League_Squad_Shooting_Stats_df,
+        Premier_League_Squad_Passing_Stats_df,
+        Premier_League_Squad_Pass_Types_Stats_df,
+        Premier_League_Squad_Goal_Shot_Creation_Stats_df,
+        Premier_League_Squad_Defensive_Actions_Stats_df,
+        Premier_League_Squad_Possession_Stats_df,
+        Premier_League_Squad_Miscellaneous_Stats_df
     ]
     
     columns_to_drop = ['MP', 'MP_against', '90s', '90s_against']
@@ -343,10 +351,10 @@ def main():
         lambda left, right: pd.merge(left, right, on='Squad', how='outer'),
         processed_dfs
     )
-    
+
     output_path = os.path.join(processed_dir, "Premier_League_merged_squad_stats.csv")
     merged_df.to_csv(output_path, index=False)
-    print(f"Merged data saved to {output_path}")
+    print(f"✅ Premier League merged data saved to {output_path}")
 
 if __name__ == "__main__":
     main()
