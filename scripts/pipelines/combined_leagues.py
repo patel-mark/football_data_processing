@@ -71,6 +71,16 @@ def main():
     # Concatenate all dataframes
     combined_df = pd.concat(all_leagues, ignore_index=True)
     
+    # MODIFICATION START: Drop 'League' and rename 'Squad' to 'team'
+    # Drop League column if it exists
+    if 'League' in combined_df.columns:
+        combined_df.drop(columns=['League'], inplace=True)
+    
+    # Rename Squad column to team if it exists
+    if 'Squad' in combined_df.columns:
+        combined_df.rename(columns={'Squad': 'team'}, inplace=True)
+    # MODIFICATION END
+    
     # Save combined data
     output_path = final_data_dir / "Combined_Leagues_Stats.csv"
     combined_df.to_csv(output_path, index=False)
